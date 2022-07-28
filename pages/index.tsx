@@ -7,7 +7,7 @@ const demoLabels = {
     "hispaniclatino": "Hispanic or Latino",
     "black": "Black",
     "nativeamer": "Native American",
-    "mena": "Middle Eastern or North African",
+    "mena": "Middle Eastern",
 };
 
 const filterLabels = {
