@@ -78,7 +78,7 @@ export default function Home() {
         }).filter(d => d.name.toLowerCase().includes(search.toLowerCase()));
 
         setDisplayJudges(filteredJudges);
-    }, [filter]);
+    }, [filter, search]);
 
     function sortByField(field: string) {
         const sortedJudges = [...displayJudges].sort((a, b) => (b[field] < a[field]) ? (-1)**(iter + 1) : (b[field] > a[field]) ? (-1)**(iter + 2) : 0);
@@ -86,8 +86,6 @@ export default function Home() {
         setIter(prev => (prev + 1) % 2);
         setSortBy(field);
     }
-
-    console.log(iter);
 
     return (
         <div className="max-w-3xl mx-auto">
