@@ -20,7 +20,7 @@
     "award": [
       "Livingston"
     ],
-    "title": "Author, Media and Communications Writer",
+    "title": "Author, contributor",
     "organization": "The New Yorker",
     "asian": "",
     "black": "",
@@ -68,7 +68,7 @@
     "award": [
       "Livingston"
     ],
-    "title": "Columnist and Editorial Board Member",
+    "title": "Columnist",
     "organization": "Chicago Tribune",
     "asian": "",
     "black": 1,
@@ -245,7 +245,7 @@
       "Peabody"
     ],
     "title": "Professor",
-    "organization": "University of California-Santa Cruz",
+    "organization": "UC Santa Cruz",
     "asian": "",
     "black": 1,
     "hispaniclatino": "",
@@ -469,7 +469,7 @@
       "Loeb"
     ],
     "title": "Dean, School of Journalism",
-    "organization": "University of California Berkeley",
+    "organization": "UC Berkeley",
     "asian": 1,
     "black": "",
     "hispaniclatino": "",
@@ -501,7 +501,7 @@
       "Loeb",
       "Pulitzer"
     ],
-    "title": "Senior Vice President for News & Editorial Director",
+    "title": "SVP for News & Editorial Director",
     "organization": "NPR",
     "asian": "",
     "black": "",
@@ -517,8 +517,8 @@
     "award": [
       "Loeb"
     ],
-    "title": "Dean, Anderson School of Management",
-    "organization": "University of California Los Angeles",
+    "title": "Dean",
+    "organization": "UCLA Anderson School of Management",
     "asian": "",
     "black": "",
     "hispaniclatino": "",
@@ -565,7 +565,7 @@
     "award": [
       "Loeb"
     ],
-    "title": "Former Chief Executive Officer & Editor Emeritus",
+    "title": "Former CEO & Editor Emeritus",
     "organization": "TheStreet",
     "asian": "",
     "black": "",
@@ -725,8 +725,8 @@
     "award": [
       "Loeb"
     ],
-    "title": "Chairman Editorial Board & Editor-at-Large",
-    "organization": "US",
+    "title": "Editor-at-large, US",
+    "organization": "Financial Times",
     "asian": "",
     "black": "",
     "hispaniclatino": "",
@@ -741,7 +741,7 @@
     "award": [
       "Loeb"
     ],
-    "title": "Global Energy and Climate Innovation Editor",
+    "title": "Editor",
     "organization": "The Economist",
     "asian": 1,
     "black": "",
@@ -757,7 +757,7 @@
     "award": [
       "Loeb"
     ],
-    "title": "Editor-in-Chief Emeritus and Founder",
+    "title": "Founder",
     "organization": "Bloomberg News",
     "asian": "",
     "black": "",
@@ -774,7 +774,7 @@
       "Pulitzer"
     ],
     "title": "Dean",
-    "organization": "Graduate School of Journalism, Columbia University",
+    "organization": "Columbia Graduate School of Journalism",
     "asian": "",
     "black": "",
     "hispaniclatino": "",
@@ -821,7 +821,7 @@
     "award": [
       "Pulitzer"
     ],
-    "title": "Associate Editor and Nonfiction Book Critic",
+    "title": "Associate Editor",
     "organization": "The Washington Post",
     "asian": "",
     "black": "",
@@ -854,7 +854,7 @@
       "Pulitzer"
     ],
     "title": "Professor",
-    "organization": "University of California, Los Angeles",
+    "organization": "UCLA",
     "asian": "",
     "black": 1,
     "hispaniclatino": "",
@@ -917,7 +917,7 @@
     "award": [
       "Pulitzer"
     ],
-    "title": "Editor and Senior Vice President",
+    "title": "Editor and SVP",
     "organization": "The Philadelphia Inquirer",
     "asian": "",
     "black": "",
@@ -934,7 +934,7 @@
       "Pulitzer"
     ],
     "title": "Administrator",
-    "organization": "The Pulitzer Prizes, Columbia University",
+    "organization": "The Pulitzer Prizes",
     "asian": "",
     "black": "",
     "hispaniclatino": "",
@@ -981,7 +981,7 @@
     "award": [
       "Pulitzer"
     ],
-    "title": "Vice President and Editor at Large for Standards",
+    "title": "VP",
     "organization": "Associated Press",
     "asian": "",
     "black": "",
