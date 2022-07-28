@@ -90,10 +90,9 @@ export default function Home() {
     return (
         <div className="max-w-3xl mx-auto">
             <div className="sticky top-0 bg-white z-10 px-4 pt-4 border-b border-black">
-                <h1 className="text-2xl font-bold mb-8">All award judges</h1>
-                <Label>Filter by</Label>
                 <div className="overflow-x-auto">
-                    <div className="flex my-4">
+                    <div className="flex my-4 items-center">
+                        <Label className="flex-shrink-0 mr-4">Filter by</Label>
                         {Object.keys(filterLabels).map(option => (
                             <button
                                 className={`px-3 mr-2 py-1 rounded-full text-sm whitespace-nowrap ${option === filter ? "text-white bg-brand" : "border"}`}
@@ -105,7 +104,6 @@ export default function Home() {
                                onChange={e => setSearch(e.target.value)}/>
                     </div>
                 </div>
-                <p className="opacity-50 my-2 text-sm">Click on a heading to sort</p>
                 <div className="flex mb-2">
                     <button className="w-48 sm:w-72 flex-shrink-0 text-left" onClick={() => sortByField("name")}>
                         <Label>Name {sortBy === "name" ? iter ? "↓" : "↑" : ""}</Label>
@@ -118,6 +116,7 @@ export default function Home() {
                     </button>
                 </div>
             </div>
+            <p className="opacity-50 my-2 text-sm px-4">Click on a heading to sort</p>
             {displayJudges.map(judge => (
                 <div className="flex border-b py-3 hover:bg-gray-100 px-4" key={judge.name + judge.award}>
                     <div className="w-48 sm:w-72">
