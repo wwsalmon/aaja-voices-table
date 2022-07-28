@@ -3,7 +3,16 @@ module.exports = {
         './**/*.html',
         './**/*.tsx',
     ],
-    theme: {},
+    theme: {
+        extend: {
+            screens: {
+                "xs": "400px",
+            },
+            colors: {
+                "brand": "#0062F1",
+            }
+        }
+    },
     variants: {},
     plugins: [],
 }
