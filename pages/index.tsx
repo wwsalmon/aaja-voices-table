@@ -71,6 +71,8 @@ export default function Home() {
     const [sortBy, setSortBy] = useState("none");
 
     useEffect(() => {
+        setSortBy("none");
+
         const filteredJudges = enhancedJudges.filter(d => {
             if (filter === "all") return true;
             if (filter === "responded") return d.responded;
