@@ -36,17 +36,14 @@ const enhancedJudges = judges.map(d => {
         awardString?: string,
     } = {...d};
 
-    newJudge["responseStatus"] = (() => {
-        if (d.source) return (
-            <a href={d.source} className="underline" target="__blank">Source</a>
-        )
-
-        if (d.responded) return "Responded to Voices";
-
-        if (d.declined) return "Declined to respond";
-
-        return "No response";
-    })();
+    newJudge["responseStatus"] = (
+        <>
+            {d.source && (
+                <><a href={d.source} className="underline" target="__blank">Source</a>, </>
+            )}
+            {d.responded ? "Responded to Voices" : d.declined ? "Declined to respond" : "No response"}
+        </>
+    );
 
     newJudge["raceEthnicity"] = (() => {
         if (!d.responded && !d.source) return "Unknown"
