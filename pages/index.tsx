@@ -93,37 +93,39 @@ export default function Home() {
     console.log(iter);
 
     return (
-        <div className="max-w-3xl mx-auto px-4">
-            <h1 className="text-2xl font-bold mb-8">All award judges</h1>
-            <Label>Filter by</Label>
-            <div className="overflow-x-auto">
-                <div className="flex my-4">
-                    {Object.keys(filterLabels).map(option => (
-                        <button
-                            className={`px-3 mr-2 py-1 rounded-full text-sm whitespace-nowrap ${option === filter ? "text-white bg-brand" : "border"}`}
-                            key={option}
-                            onClick={() => setFilter(option)}
-                        >{filterLabels[option]}</button>
-                    ))}
-                    <input type="text" placeholder="Search by name" className="border-b px-2 py-1 w-40" value={search}
-                           onChange={e => setSearch(e.target.value)}/>
+        <div className="max-w-3xl mx-auto">
+            <div className="sticky top-0 bg-white z-10 px-4 pb-2 pt-4">
+                <h1 className="text-2xl font-bold mb-8">All award judges</h1>
+                <Label>Filter by</Label>
+                <div className="overflow-x-auto">
+                    <div className="flex my-4">
+                        {Object.keys(filterLabels).map(option => (
+                            <button
+                                className={`px-3 mr-2 py-1 rounded-full text-sm whitespace-nowrap ${option === filter ? "text-white bg-brand" : "border"}`}
+                                key={option}
+                                onClick={() => setFilter(option)}
+                            >{filterLabels[option]}</button>
+                        ))}
+                        <input type="text" placeholder="Search by name" className="border-b px-2 py-1 w-40" value={search}
+                               onChange={e => setSearch(e.target.value)}/>
+                    </div>
+                </div>
+                <div className="flex mt-6 mb-2">
+                    <button className="w-48 sm:w-72 flex-shrink-0 text-left" onClick={() => sortByField("name")}>
+                        <Label>Name {sortBy === "name" ? iter ? "↓" : "↑" : ""}</Label>
+                    </button>
+                    <button className="w-32 ml-4 hidden sm:block text-left" onClick={() => sortByField("awardString")}>
+                        <Label>Award {sortBy === "awardString" ? iter ? "↓" : "↑" : ""}</Label>
+                    </button>
+                    <button className="ml-4 text-left" onClick={() => sortByField("raceEthnicity")}>
+                        <Label>Race/ethnicity {sortBy === "raceEthnicity" ? iter ? "↓" : "↑" : ""}</Label>
+                    </button>
                 </div>
             </div>
-            <div className="flex mt-6 mb-2">
-                <button className="w-48 xs:w-72 flex-shrink-0 text-left" onClick={() => sortByField("name")}>
-                    <Label>Name {sortBy === "name" ? iter ? "↓" : "↑" : ""}</Label>
-                </button>
-                <button className="w-32 ml-4 hidden sm:block text-left" onClick={() => sortByField("awardString")}>
-                    <Label>Award {sortBy === "awardString" ? iter ? "↓" : "↑" : ""}</Label>
-                </button>
-                <button className="ml-4 text-left" onClick={() => sortByField("raceEthnicity")}>
-                    <Label>Race/ethnicity {sortBy === "raceEthnicity" ? iter ? "↓" : "↑" : ""}</Label>
-                </button>
-            </div>
-            <p className="opacity-50 my-2 text-sm">Click on a heading to sort</p>
+            <p className="opacity-50 my-2 text-sm px-4">Click on a heading to sort</p>
             {displayJudges.map(judge => (
-                <div className="flex border-b py-3 hover:bg-gray-100 px-4 -mx-4" key={judge.name + judge.award}>
-                    <div className="w-48 xs:w-72">
+                <div className="flex border-b py-3 hover:bg-gray-100 px-4" key={judge.name + judge.award}>
+                    <div className="w-48 sm:w-72">
                         <p>{judge.name}</p>
                         <p className="opacity-50 truncate text-sm hidden sm:block">{judge.title || ""}{judge.title && judge.organization && ", "}{judge.organization || ""}</p>
                         <p className="opacity-50 truncate text-sm sm:hidden">{judge.awardString} judge</p>
