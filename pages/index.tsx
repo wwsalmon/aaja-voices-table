@@ -1,6 +1,6 @@
 import Label from "../components/Label";
 import judges from "../judges.json";
-import {useState} from "react";
+import {ReactNode, useEffect, useState} from "react";
 
 const demoLabels = {
     "asian": "Asian American",
@@ -17,16 +17,78 @@ const filterLabels = {
     declined: "Declined to respond (5)",
 }
 
+const enhancedJudges = judges.map(d => {
+    let newJudge: {
+        name: string,
+        title: string,
+        organization: string,
+        award: string[],
+        black: string | number,
+        asian: string | number,
+        hispaniclatino: string | number,
+        nativeamer: string | number,
+        mena: string | number,
+        responded: string | number,
+        declined: string | number,
+        source: string,
+        responseStatus?: ReactNode,
+        raceEthnicity?: string,
+        awardString?: string,
+    } = {...d};
+
+    newJudge["responseStatus"] = (() => {
+        if (d.source) return (
+            <a href={d.source} className="underline" target="__blank">Source</a>
+        )
+
+        if (d.responded) return "Responded to Voices";
+
+        if (d.declined) return "Declined to respond";
+
+        return "No response";
+    })();
+
+    newJudge["raceEthnicity"] = (() => {
+        if (!d.responded && !d.source) return "Unknown"
+        let races = [];
+        for (let label of Object.keys(demoLabels)) {
+            if (d[label]) races.push(demoLabels[label]);
+        }
+        if (!races.length) races.push("White");
+        return races.join(", ");
+    })();
+
+    newJudge["awardString"] = d.award.join(", ");
+
+    return newJudge;
+});
+
 export default function Home() {
     const [filter, setFilter] = useState("all");
     const [search, setSearch] = useState("");
+    const [displayJudges, setDisplayJudges] = useState(enhancedJudges);
+    const [iter, setIter] = useState(0);
+    const [sortBy, setSortBy] = useState("none");
 
-    const filteredJudges = judges.filter(d => {
-        if (filter === "all") return true;
-        if (filter === "responded") return d.responded;
-        if (filter === "none") return !d.responded && !d.declined;
-        if (filter === "declined") return d.declined;
-    }).filter(d => d.name.toLowerCase().includes(search.toLowerCase()));
+    useEffect(() => {
+        const filteredJudges = enhancedJudges.filter(d => {
+            if (filter === "all") return true;
+            if (filter === "responded") return d.responded;
+            if (filter === "none") return !d.responded && !d.declined;
+            if (filter === "declined") return d.declined;
+        }).filter(d => d.name.toLowerCase().includes(search.toLowerCase()));
+
+        setDisplayJudges(filteredJudges);
+    }, [filter]);
+
+    function sortByField(field: string) {
+        const sortedJudges = [...displayJudges].sort((a, b) => (b[field] < a[field]) ? (-1)**(iter + 1) : (b[field] > a[field]) ? (-1)**(iter + 2) : 0);
+        setDisplayJudges(sortedJudges);
+        setIter(prev => (prev + 1) % 2);
+        setSortBy(field);
+    }
+
+    console.log(iter);
 
     return (
         <div className="max-w-3xl mx-auto px-4">
@@ -45,43 +107,31 @@ export default function Home() {
                            onChange={e => setSearch(e.target.value)}/>
                 </div>
             </div>
-            <div className="flex mt-12 mb-2">
-                <Label className="w-48 xs:w-72 flex-shrink-0">Name</Label>
-                <Label className="w-32 ml-4 hidden sm:block">Award</Label>
-                <Label className="ml-4">Race/ethnicity</Label>
+            <div className="flex mt-6 mb-2">
+                <button className="w-48 xs:w-72 flex-shrink-0 text-left" onClick={() => sortByField("name")}>
+                    <Label>Name {sortBy === "name" ? iter ? "↓" : "↑" : ""}</Label>
+                </button>
+                <button className="w-32 ml-4 hidden sm:block text-left" onClick={() => sortByField("awardString")}>
+                    <Label>Award {sortBy === "awardString" ? iter ? "↓" : "↑" : ""}</Label>
+                </button>
+                <button className="ml-4 text-left" onClick={() => sortByField("raceEthnicity")}>
+                    <Label>Race/ethnicity {sortBy === "raceEthnicity" ? iter ? "↓" : "↑" : ""}</Label>
+                </button>
             </div>
-            {filteredJudges.map(judge => (
+            <p className="opacity-50 my-2 text-sm">Click on a heading to sort</p>
+            {displayJudges.map(judge => (
                 <div className="flex border-b py-3 hover:bg-gray-100 px-4 -mx-4" key={judge.name + judge.award}>
                     <div className="w-48 xs:w-72">
                         <p>{judge.name}</p>
                         <p className="opacity-50 truncate text-sm hidden sm:block">{judge.title || ""}{judge.title && judge.organization && ", "}{judge.organization || ""}</p>
-                        <p className="opacity-50 truncate text-sm sm:hidden">{judge.award.join(", ")} judge</p>
+                        <p className="opacity-50 truncate text-sm sm:hidden">{judge.awardString} judge</p>
                     </div>
                     <div className="w-32 ml-4 hidden sm:block flex-shrink-0">
                         <p>{judge.award.join(", ")}</p>
                     </div>
                     <div className="ml-4">
-                        <p>{(d => {
-                            if (!d.responded && !d.source) return "Unknown"
-                            let races = [];
-                            for (let label of Object.keys(demoLabels)) {
-                                if (d[label]) races.push(demoLabels[label]);
-                            }
-                            if (!races.length) races.push("White");
-                            let raceText = races.join(", ");
-                            return races.join(", ");
-                        })(judge)}</p>
-                        <p className="text-sm opacity-50">{(d => {
-                            if (d.source) return (
-                                <a href={d.source} className="underline" target="__blank">Source</a>
-                            )
-
-                            if (d.responded) return "Responded to Voices";
-
-                            if (d.declined) return "Declined to respond";
-
-                            return "No response";
-                        })(judge)}</p>
+                        <p>{judge.raceEthnicity}</p>
+                        <p className="text-sm opacity-50">{judge.responseStatus}</p>
                     </div>
                 </div>
             ))}
