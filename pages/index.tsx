@@ -106,26 +106,29 @@ export default function Home() {
 
     return (
         <div className="max-w-3xl mx-auto">
-            <div className="sticky top-0 bg-white z-10 px-4 pt-4 border-b border-black">
-                <div className="overflow-x-auto">
-                    <div className="flex my-4 items-center">
+            <div className="sticky top-0 bg-white z-10 px-2 pt-2 border-b border-black">
+                    <div className="flex mb-4 items-center flex-wrap">
                         <Label className="flex-shrink-0 mr-4">Filter by</Label>
                         {Object.keys(filterLabels).map(option => (
                             <button
-                                className={`px-3 mr-2 py-1 rounded-full text-sm whitespace-nowrap ${option === filter ? "text-white bg-brand" : "border"}`}
+                                className={`px-3 mr-2 my-1 py-1 rounded-full text-sm whitespace-nowrap hidden sm:inline-block ${option === filter ? "text-white bg-brand" : "border"}`}
                                 key={option}
                                 onClick={() => setFilter(option)}
                             >{filterLabels[option]}</button>
                         ))}
-                        <input type="text" placeholder="Search by any field" className="border-b px-2 py-1 w-40" value={search}
+                        <select className="sm:hidden block my-2 text-sm p-1 border rounded-full" onChange={e => setFilter(e.target.value)}>
+                            {Object.keys(filterLabels).map(option => (
+                                <option value={option}>{filterLabels[option]}</option>
+                            ))}
+                        </select>
+                        <input type="text" placeholder="Search by any field" className="border-b px-2 py-1 w-full max-w-[400px] my-1 text-sm sm:text-base" value={search}
                                onChange={e => setSearch(e.target.value)}/>
                     </div>
-                </div>
                 <div className="flex mb-2">
-                    <button className="w-48 sm:w-72 flex-shrink-0 text-left" onClick={() => sortByField("name")}>
+                    <button className="w-40 sm:w-72 flex-shrink-0 text-left" onClick={() => sortByField("name")}>
                         <Label>Name {sortBy === "name" ? iter ? "↓" : "↑" : ""}</Label>
                     </button>
-                    <button className="w-32 ml-4 hidden sm:block text-left" onClick={() => sortByField("awardString")}>
+                    <button className="w-32 ml-4 hidden xs:block text-left" onClick={() => sortByField("awardString")}>
                         <Label>Award panel {sortBy === "awardString" ? iter ? "↓" : "↑" : ""}</Label>
                     </button>
                     <button className="ml-4 text-left" onClick={() => sortByField("raceEthnicity")}>
@@ -133,20 +136,20 @@ export default function Home() {
                     </button>
                 </div>
             </div>
-            <p className="opacity-50 my-2 text-sm px-4">Click on a heading to sort</p>
+            <p className="opacity-50 my-2 text-xs sm:text-sm px-2">Click on a heading to sort</p>
             {displayJudges.map(judge => (
-                <div className="flex border-b py-3 hover:bg-gray-100 px-4" key={judge.name + judge.award}>
-                    <div className="w-48 sm:w-72 flex-shrink-0">
-                        <p>{judge.name}</p>
-                        <p className="opacity-50 truncate text-sm hidden sm:block">{judge.title || ""}{judge.title && judge.organization && ", "}{judge.organization || ""}</p>
-                        <p className="opacity-50 truncate text-sm sm:hidden">{judge.awardString} judge</p>
+                <div className="flex border-b py-3 hover:bg-gray-100 px-2" key={judge.name + judge.award}>
+                    <div className="w-40 sm:w-72 flex-shrink-0">
+                        <p className="text-sm sm:text-base">{judge.name}</p>
+                        <p className="opacity-50 truncate text-xs sm:text-sm hidden sm:block">{judge.title || ""}{judge.title && judge.organization && ", "}{judge.organization || ""}</p>
+                        <p className="opacity-50 truncate text-xs sm:text-sm sm:hidden">{judge.awardString} judge</p>
                     </div>
-                    <div className="w-32 ml-4 hidden sm:block flex-shrink-0">
-                        <p>{judge.award.join(", ")}</p>
+                    <div className="w-32 ml-4 hidden xs:block flex-shrink-0">
+                        <p className="text-sm sm:text-base">{judge.award.join(", ")}</p>
                     </div>
                     <div className="ml-4">
-                        <p>{judge.raceEthnicity}</p>
-                        <p className="text-sm opacity-50">{judge.responseStatus}</p>
+                        <p className="text-sm sm:text-base">{judge.raceEthnicity}</p>
+                        <p className="text-xs sm:text-sm opacity-50">{judge.responseStatus}</p>
                     </div>
                 </div>
             ))}

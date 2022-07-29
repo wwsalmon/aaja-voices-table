@@ -6,7 +6,7 @@ module.exports = {
     theme: {
         extend: {
             screens: {
-                "xs": "400px",
+                "xs": "450px",
             },
             colors: {
                 "brand": "#0062F1",
