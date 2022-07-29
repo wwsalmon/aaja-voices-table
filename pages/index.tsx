@@ -78,7 +78,9 @@ export default function Home() {
         }).filter(d =>
             d.name.toLowerCase().includes(search.toLowerCase()) ||
             d.awardString.toLowerCase().includes(search.toLowerCase()) ||
-            d.raceEthnicity.toLowerCase().includes(search.toLowerCase())
+            d.raceEthnicity.toLowerCase().includes(search.toLowerCase()) ||
+            d.organization.toLowerCase().includes(search.toLowerCase()) ||
+            d.title.toLowerCase().includes(search.toLowerCase())
         );
 
         setDisplayJudges(filteredJudges);
