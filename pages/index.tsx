@@ -126,7 +126,7 @@ export default function Home() {
                         <Label>Name {sortBy === "name" ? iter ? "↓" : "↑" : ""}</Label>
                     </button>
                     <button className="w-32 ml-4 hidden sm:block text-left" onClick={() => sortByField("awardString")}>
-                        <Label>Award {sortBy === "awardString" ? iter ? "↓" : "↑" : ""}</Label>
+                        <Label>Award panel {sortBy === "awardString" ? iter ? "↓" : "↑" : ""}</Label>
                     </button>
                     <button className="ml-4 text-left" onClick={() => sortByField("raceEthnicity")}>
                         <Label>Race/ethnicity {sortBy === "raceEthnicity" ? iter ? "↓" : "↑" : ""}</Label>
