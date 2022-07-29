@@ -66,24 +66,35 @@ export default function Home() {
     const [displayJudges, setDisplayJudges] = useState(enhancedJudges);
     const [iter, setIter] = useState(0);
     const [sortBy, setSortBy] = useState("none");
+    const [init, setInit] = useState(true);
 
     useEffect(() => {
-        setSortBy("none");
+        if (init) {
+            const sortedJudges = enhancedJudges.sort((a, b) => {
+                return b["awardString"]<a["awardString"]?-1:(b["awardString"]>a["awardString"]?1:(a["name"]<b["name"]?-1:1));
+            });
 
-        const filteredJudges = enhancedJudges.filter(d => {
-            if (filter === "all") return true;
-            if (filter === "responded") return d.responded;
-            if (filter === "none") return !d.responded && !d.declined;
-            if (filter === "declined") return d.declined;
-        }).filter(d =>
-            d.name.toLowerCase().includes(search.toLowerCase()) ||
-            d.awardString.toLowerCase().includes(search.toLowerCase()) ||
-            d.raceEthnicity.toLowerCase().includes(search.toLowerCase()) ||
-            d.organization.toLowerCase().includes(search.toLowerCase()) ||
-            d.title.toLowerCase().includes(search.toLowerCase())
-        );
+            setDisplayJudges(sortedJudges);
 
-        setDisplayJudges(filteredJudges);
+            setInit(false);
+        } else {
+            setSortBy("none");
+
+            const filteredJudges = enhancedJudges.filter(d => {
+                if (filter === "all") return true;
+                if (filter === "responded") return d.responded;
+                if (filter === "none") return !d.responded && !d.declined;
+                if (filter === "declined") return d.declined;
+            }).filter(d =>
+                d.name.toLowerCase().includes(search.toLowerCase()) ||
+                d.awardString.toLowerCase().includes(search.toLowerCase()) ||
+                d.raceEthnicity.toLowerCase().includes(search.toLowerCase()) ||
+                d.organization.toLowerCase().includes(search.toLowerCase()) ||
+                d.title.toLowerCase().includes(search.toLowerCase())
+            );
+
+            setDisplayJudges(filteredJudges);
+        }
     }, [filter, search]);
 
     function sortByField(field: string) {
