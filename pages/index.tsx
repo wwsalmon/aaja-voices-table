@@ -125,7 +125,7 @@ export default function Home() {
             <p className="opacity-50 my-2 text-sm px-4">Click on a heading to sort</p>
             {displayJudges.map(judge => (
                 <div className="flex border-b py-3 hover:bg-gray-100 px-4" key={judge.name + judge.award}>
-                    <div className="w-48 sm:w-72">
+                    <div className="w-48 sm:w-72 flex-shrink-0">
                         <p>{judge.name}</p>
                         <p className="opacity-50 truncate text-sm hidden sm:block">{judge.title || ""}{judge.title && judge.organization && ", "}{judge.organization || ""}</p>
                         <p className="opacity-50 truncate text-sm sm:hidden">{judge.awardString} judge</p>
