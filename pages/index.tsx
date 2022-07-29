@@ -75,7 +75,11 @@ export default function Home() {
             if (filter === "responded") return d.responded;
             if (filter === "none") return !d.responded && !d.declined;
             if (filter === "declined") return d.declined;
-        }).filter(d => d.name.toLowerCase().includes(search.toLowerCase()));
+        }).filter(d =>
+            d.name.toLowerCase().includes(search.toLowerCase()) ||
+            d.awardString.toLowerCase().includes(search.toLowerCase()) ||
+            d.raceEthnicity.toLowerCase().includes(search.toLowerCase())
+        );
 
         setDisplayJudges(filteredJudges);
     }, [filter, search]);
@@ -100,7 +104,7 @@ export default function Home() {
                                 onClick={() => setFilter(option)}
                             >{filterLabels[option]}</button>
                         ))}
-                        <input type="text" placeholder="Search by name" className="border-b px-2 py-1 w-40" value={search}
+                        <input type="text" placeholder="Search by any field" className="border-b px-2 py-1 w-40" value={search}
                                onChange={e => setSearch(e.target.value)}/>
                     </div>
                 </div>
