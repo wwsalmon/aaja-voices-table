@@ -13,8 +13,8 @@ const demoLabels = {
 const filterLabels = {
     all: "All (66)",
     responded: "Responded (28)",
-    none: "No response (34)",
-    declined: "Declined to respond (4)",
+    none: "No response (35)",
+    declined: "Declined to respond (3)",
 }
 
 const enhancedJudges = judges.map(d => {
