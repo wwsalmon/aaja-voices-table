@@ -11,10 +11,10 @@ const demoLabels = {
 };
 
 const filterLabels = {
-    all: "All (66)",
-    responded: "Responded (29)",
-    none: "No response (34)",
-    declined: "Declined to respond (3)",
+    all: `All (${judges.length})`,
+    responded: `Responded (${judges.filter(d => d.responded).length})`,
+    none: `No response (${judges.filter(d => !(d.responded || d.declined)).length})`,
+    declined: `Declined to respond (${judges.filter(d => d.declined).length})`,
 }
 
 const enhancedJudges = judges.map(d => {
