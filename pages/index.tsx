@@ -41,7 +41,7 @@ const enhancedJudges = judges.map(d => {
             {d.source && (
                 <><a href={d.source} className="underline" target="__blank">Source</a>, </>
             )}
-            {d.responded ? "Responded to Voices" : d.declined ? "Declined to respond" : "No response"}
+            {d.responded ? d.responded === "late" ? "Responded after deadline" : "Responded to Voices" : d.declined ? "Declined to respond" : "No response"}
         </>
     );
 
